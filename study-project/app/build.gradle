@@ -1,8 +1,11 @@
 // Gradle 도구에 추가할 작업이 있으면 플러그인을 장착하라!
 plugins {
-    
-    id 'application' // 자바 애플리케이션 빌드 관련 작업들을 추가한다
+    // id 'java' 자바 애플리케이션 빌드 관련 작업들을 추가한다
+    // javac로 컴파일 할 때 사용하는 플러그인!!!!!!! 정신차려
+    id 'application' // java 플러그인 + 애플리케이션 관련 작업 추가
+    // gradle init 할 때 2 application 으로 만들었잖아!!!!!
     id 'eclipse' // 이클립스 IDE 관련 작업을 플러그인, 그러면 이클립스 작업 가능
+    // id 'java'
     // eclipseProject : .project 파일 생성
     // eclipseClasspath : .classpath 파일 생성
     // eclipseJdt : JDT 관련 파일 생성(.settings / 폴더 및 파일 생성)
@@ -36,8 +39,11 @@ dependencies {
     implementation 'com.google.guava:guava:30.1-jre'
 }
 
+// 'application' 플러그인에서 run 작업을 수행할 때 사용할
+// 클래스 이름을 지정한다.
 
 application {
-    mainClass = 'com.eomcs.pms.App'
+    mainClass = 'com.eomcs.pms.App3'
 }
 
+compileJava.options.encoding='UTF-8' // 인코딩 옵션 추가
