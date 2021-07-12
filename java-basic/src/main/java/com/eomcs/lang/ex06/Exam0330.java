@@ -9,7 +9,7 @@ public class Exam0330 {
     // 5 * 5 까지만 출력하라!
     //
     while (x <= 9) {
-
+      // x가 9보다 작을때 아래 while문을 반복한다
       while (y <= 9) {
         System.out.printf("%d * %d = %d\n", x, y, x * y);
         if (x == 5 && y == 5)

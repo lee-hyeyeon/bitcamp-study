@@ -2,7 +2,7 @@ package com.eomcs.lang.ex05;
 
 //# 증감 연산자 : 전위(pre-fix) 증감 연산자 응용 II
 //
-public class Exam0681 {
+public class Exam0681_ok {
   public static void main(String[] args) {
     int a = 5;
     int r = --a + --a / --a;

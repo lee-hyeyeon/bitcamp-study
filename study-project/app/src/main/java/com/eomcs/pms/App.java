@@ -1,79 +1,89 @@
 package com.eomcs.pms;
 
-import java.util.Date;
 import java.util.Scanner;
 
-//1) 배열 사용 전 -3개정도 OK!
-//2) 배열 사용 후 -3개정도 OK!!
-//3) 반복문 적용 : while OK!!!
-//4) 반복문 적용 : for OK!!!!
-//5) 여러 문장에서 반복해서 사용하는 값은 변수에 담아서 사용한다. OK!!!!
-//6) 조회용으로만 사용할 변수라면 상수로 선언한다. OK!!!!
-//7) 특정 조건에 따라 반복을 멈춘다 "계속 입력하시겠습니까?" OK!!!!!
-//8) 날짜의 출력형식을 "yyyy-MM-dd"로 변경한다.
+// 1) 변경준비
+// 2) 사용자에게 명령 프롬프트 출력
+// 3) 사용자의 명령을 입력 받아 출력
+// 4) 명령어 입력 받아 출력 하는 것을 무한 반복
+// 5) exit나 quit 명령을 입력하면 반복 실행 중지
 
 public class App {
 
   public static void main(String[] args) {
-    System.out.println("[회원]");
+    Scanner keyboardScan = new Scanner(System.in);
 
-    final int MAX_LENGTH = 2;
+    while(true) {
+      System.out.print("명령> ");
 
-    int[] no = new int[MAX_LENGTH];
-    String[] name = new String[MAX_LENGTH];
-    String[] email = new String[MAX_LENGTH];
-    String[] password = new String[MAX_LENGTH];
-    String[] photo = new String[MAX_LENGTH];
-    String[] tel = new String[MAX_LENGTH];
-    Date[] registeredDate = new Date[MAX_LENGTH];
+      String input = keyboardScan.nextLine();
 
-    Scanner scan = new Scanner(System.in);
+      if(input.equals("exit") || input.equals("quit")) {
+        break;
+      }
+
+
+      System.out.println(input);
+    }
+
+
+
+    /*
+    // 최대 입력 개수
+    final int LENGTH = 100;
+
+    int[] no = new int[LENGTH];
+    String[] name = new String[LENGTH];
+    String[] email = new String[LENGTH];
+    String[] password = new String[LENGTH];
+    String[] photo = new String[LENGTH];
+    String[] tel = new String[LENGTH];
+    Date[] registeredDate = new Date[LENGTH];
 
     int size = 0;
 
-    for (int i = 0; i < MAX_LENGTH; i++) {
-
+    for (int i = 0; i < LENGTH; i++) {
       System.out.print("번호? ");
-      no[i] = Integer.parseInt(scan.nextLine());
+      no[i] = Integer.parseInt(keyboardScan.nextLine());
 
       System.out.print("이름? ");
-      name[i] = scan.nextLine();
+      name[i] = keyboardScan.nextLine();
 
       System.out.print("이메일? ");
-      email[i] = scan.nextLine();
+      email[i] = keyboardScan.nextLine();
 
       System.out.print("암호? ");
-      password[i] = scan.nextLine();
+      password[i] = keyboardScan.nextLine();
 
       System.out.print("사진? ");
-      photo[i] = scan.nextLine();
+      photo[i] = keyboardScan.nextLine();
 
       System.out.print("전화? ");
-      tel[i] = scan.nextLine();
+      tel[i] = keyboardScan.nextLine();
 
-      registeredDate[i] = new Date();
-      size = size + 1;
-      System.out.println();
+      registeredDate[i] = new java.sql.Date(System.currentTimeMillis());
 
-      System.out.print("계속 입력하시겠습니까? (y/N)");
-      String input = scan.nextLine();
+      size++;
+      System.out.println(); // 빈 줄 출력
 
-      if (input.equalsIgnoreCase("N") || input.equals("")) {
+      System.out.print("계속 입력하시겠습니까?(y/N) ");
+      String str = keyboardScan.nextLine();
+      if (!str.equalsIgnoreCase("y")) {
         break;
       }
+      System.out.println(); // 빈 줄 출력
     }
 
-    scan.close();
+    keyboardScan.close();
 
     System.out.println("--------------------------------");
 
     for (int i = 0; i < size; i++) {
-
-
-      System.out.printf("%d, %s, %s, %s, %tY-%5$tm-%5$td\n", 
+      // 번호, 이름, 이메일, 전화, 가입일
+      System.out.printf("%d, %s, %s, %s, %s\n", // 출력 형식 지정
           no[i], name[i], email[i], tel[i], registeredDate[i]);
-
     }
+     */
+    keyboardScan.close(); // 반복문을 나갈 수 있는 조건이 되면 사용 가능;
   }
 }
-

@@ -8,10 +8,11 @@ public class Exam0320 {
     int sum = 0;
 
     // 1부터 100까지의 합은?
-    while (count < 100) {
+    while (count < 100) { // '0부터 100번 반복한다' 라고 이해할 것.
       //count++;
-      //sum += count;
+      //      sum += count;
       sum += ++count;
+      //      sum += count++;
     }
     System.out.printf("count=%d, sum=%d\n", count, sum);
   }
