@@ -20,7 +20,7 @@ plugins {
 // 설정을 하지 않으면 build.gradle 파일이 있는 폴더 이름으로 자동 지정
 eclipse{
     project {
-        name = "study-project"
+        name = "study-project-client"
     }
 }
 
@@ -47,7 +47,7 @@ dependencies {
 // 클래스 이름을 지정한다.
 
 application {
-    mainClass = 'com.eomcs.pms.App3'
+    mainClass = 'com.eomcs.pms.ClientApp'
 }
 
 compileJava.options.encoding='UTF-8' // 인코딩 옵션 추가
