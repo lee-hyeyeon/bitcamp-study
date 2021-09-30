@@ -20,7 +20,7 @@ public class CommandRequest {
     paramMap.put(name, value);
   }
 
-  public Object getAttribute(String name) {
+  public Object  (String name) {
     return paramMap.get(name);
   }
 

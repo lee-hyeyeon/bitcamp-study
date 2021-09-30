@@ -1,0 +1,112 @@
+package com.eomcs.pms.table;
+
+import com.eomcs.pms.domain.Member;
+import com.eomcs.server.Request;
+import com.eomcs.server.Response;
+
+// 역할
+// - 회원 데이터를 처리하는 일을 한다.
+// 
+public class ProjectTable extends DataTable<Project> {
+
+  public ProjectTable() {
+    super("project.json");
+  }
+
+  public void execute(Request request, Response response) throws Exception {
+    switch (request.getCommand()) {
+      case "project.insert": insert(request, response); break;
+      case "project.selectList": selectList(request, response); break;
+      case "project.selectOne": selectOne(request, response); break;
+      case "project.update": update(request, response); break;
+      case "project.delete": delete(request, response); break;
+      default:
+        response.setStatus(Response.FAIL);
+        response.setValue("해당 명령을 지원하지 않습니다.");
+    }
+  }
+
+  private void insert(Request request, Response response) throws Exception {
+    Project project = request.getObject(Project.class);
+    list.add(project);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectList(Request request, Response response) throws Exception {
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
+  }
+
+  private void selectOne(Request request, Response response) throws Exception {
+    int no = Integer.parseInt(request.getParameter("no"));
+    Member m = findByNo(no);
+
+    if (m != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(m);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+    }
+  }
+
+  private void update(Request request, Response response) throws Exception {
+    Member member = request.getObject(Member.class);
+
+    int index = indexOf(member.getNo());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      return;
+    }
+
+    list.set(index, member);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void delete(Request request, Response response) throws Exception {
+    int no = Integer.parseInt(request.getParameter("no"));
+    int index = indexOf(no);
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      return;
+    }
+
+    list.remove(index);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private Member findByNo(int no) {
+    for (Member m : list) {
+      if (m.getNo() == no) {
+        return m;
+      }
+    }
+    return null;
+  }
+
+  private int indexOf(int memberNo) {   
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getNo() == memberNo) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
