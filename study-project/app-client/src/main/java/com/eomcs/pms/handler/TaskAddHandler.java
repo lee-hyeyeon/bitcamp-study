@@ -2,18 +2,21 @@ package com.eomcs.pms.handler;
 
 import com.eomcs.pms.domain.Project;
 import com.eomcs.pms.domain.Task;
+import com.eomcs.request.RequestAgent;
 import com.eomcs.util.Prompt;
 
 public class TaskAddHandler implements Command {
 
+  RequestAgent requestAgent;
   ProjectPrompt projectPrompt;
 
-  public TaskAddHandler(ProjectPrompt projectPrompt) {
+  public TaskAddHandler(RequestAgent requestAgent, ProjectPrompt projectPrompt) {
+    this.requestAgent = requestAgent;
     this.projectPrompt = projectPrompt;
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[작업 등록]");
 
     Project project = projectPrompt.promptProject();
@@ -40,9 +43,14 @@ public class TaskAddHandler implements Command {
       return; 
     }
 
-    project.getTasks().add(task);
+    requestAgent.request("project.task.insert", task);
 
-    System.out.println("작업을 등록했습니다.");
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      System.out.println("작업을 등록했습니다.");
+    } else {
+      System.out.println("작업 저장 실패!");
+    }
+
   }
 }
 

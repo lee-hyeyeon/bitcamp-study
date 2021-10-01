@@ -9,15 +9,13 @@ public class ProjectAddHandler implements Command {
   RequestAgent requestAgent;
   MemberPrompt memberPrompt;
 
-  public ProjectAddHandler(RequestAgent requestAent, MemberPrompt memberPrompt) {
-
-    this.requestAgent = requestAent;
+  public ProjectAddHandler(RequestAgent requestAgent, MemberPrompt memberPrompt) {
+    this.requestAgent = requestAgent;
     this.memberPrompt = memberPrompt;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-
     System.out.println("[프로젝트 등록]");
 
     Project project = new Project();
@@ -30,7 +28,8 @@ public class ProjectAddHandler implements Command {
     project.setOwner(AuthLoginHandler.getLoginUser());
     project.setMembers(memberPrompt.promptMembers("팀원?(완료: 빈 문자열) "));
 
-    requestAgent.request("/project/insert", project);
+    requestAgent.request("project.insert", project);
+
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("프로젝트를 저장했습니다!");
     } else {

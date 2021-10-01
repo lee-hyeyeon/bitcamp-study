@@ -13,7 +13,7 @@ public class ProjectListHandler implements Command {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[프로젝트 목록]");
 
     requestAgent.request("project.selectList", null);

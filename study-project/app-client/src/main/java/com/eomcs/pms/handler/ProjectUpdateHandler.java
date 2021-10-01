@@ -19,7 +19,7 @@ public class ProjectUpdateHandler implements Command {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[프로젝트 변경]");
     int no = (int) request.getAttribute("no");
 
@@ -30,6 +30,7 @@ public class ProjectUpdateHandler implements Command {
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 게시글이 없습니다.");
+      return;
     }
 
     Project project = requestAgent.getObject(Project.class);
@@ -66,6 +67,7 @@ public class ProjectUpdateHandler implements Command {
       System.out.println(requestAgent.getObject(String.class));
       return;
     }
+
     System.out.println("프로젝트를 변경하였습니다.");
   }
 }

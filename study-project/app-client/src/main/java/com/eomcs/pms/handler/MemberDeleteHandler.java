@@ -34,6 +34,7 @@ public class MemberDeleteHandler implements Command {
     }
 
     requestAgent.request("member.delete", params);
+
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("회원 삭제 실패!");
       System.out.println(requestAgent.getObject(String.class));

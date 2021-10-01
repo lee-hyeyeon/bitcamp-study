@@ -26,6 +26,7 @@ public class ProjectDetailHandler implements Command {
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 프로젝트가 없습니다.");
+      return;
     }
 
     Project project = requestAgent.getObject(Project.class);

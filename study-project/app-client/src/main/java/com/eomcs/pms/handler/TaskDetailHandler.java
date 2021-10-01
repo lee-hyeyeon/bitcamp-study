@@ -10,9 +10,7 @@ public class TaskDetailHandler implements Command {
   ProjectPrompt projectPrompt;
 
   public TaskDetailHandler(ProjectPrompt projectPrompt) {
-
     this.projectPrompt = projectPrompt;
-
   }
 
   @Override
@@ -32,7 +30,6 @@ public class TaskDetailHandler implements Command {
     int taskNo = Prompt.inputInt("작업 번호? ");
 
     Task task = project.findTaskByNo(taskNo);
-
     if (task == null) {
       System.out.println("해당 번호의 작업이 없습니다.");
       return;
@@ -45,8 +42,14 @@ public class TaskDetailHandler implements Command {
     System.out.println();
 
     Member loginUser = AuthLoginHandler.getLoginUser(); 
-    if (loginUser == null || (task.getNo() != loginUser.getNo() && !loginUser.getEmail().equals("root@test.com"))) {
+    if (loginUser == null) {
       return;
+    }
+
+    if (!loginUser.getEmail().equals("root@test.com")) {
+      if (project.getOwner().getNo() != loginUser.getNo()) {
+        return;
+      }
     }
 
     request.setAttribute("project", project);

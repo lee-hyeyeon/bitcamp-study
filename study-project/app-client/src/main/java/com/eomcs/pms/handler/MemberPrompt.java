@@ -12,18 +12,14 @@ public class MemberPrompt {
   RequestAgent requestAgent;
 
   public MemberPrompt(RequestAgent requestAgent) {
-
     this.requestAgent = requestAgent;
-
   }
 
-  protected Member findByName(String name) {
-
+  protected Member findByName(String name) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("name", name);
 
     requestAgent.request("member.selectOneByName", params);
-
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
@@ -39,7 +35,7 @@ public class MemberPrompt {
     return null;
   }
 
-  public Member promptMember(String label) {
+  public Member promptMember(String label) throws Exception {
     while (true) {
       String memberName = Prompt.inputString(label);
       if (memberName.length() == 0) {
@@ -71,7 +67,7 @@ public class MemberPrompt {
     }
   }
 
-  public List<Member> promptMembers(String label) {
+  public List<Member> promptMembers(String label) throws Exception {
     ArrayList<Member> members = new ArrayList<>();
 
     while (true) {
